@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:news/routes.dart';
+import 'package:news/themes.dart';
 import 'loginpage.dart';
 
 Future<void> main()  async {
   WidgetsFlutterBinding.ensureInitialized();
+  try{
   await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: 'AIzaSyAyqwYfvQB2tWnmo8URm5HUyA5BY00oJHc',
@@ -14,9 +17,12 @@ Future<void> main()  async {
       authDomain: 'https://news-app-a72fd-default-rtdb.asia-southeast1.firebasedatabase.app',
       databaseURL: 'https://react-native-firebase-testing.firebaseio.com',
       storageBucket: 'news-app-a72fd.appspot.com',
-      //measurementId: 'G-F79DJ0VFGS',
     ),
-  );
+  );}catch(e){
+    if (kDebugMode) {
+      print(e.toString());
+    }
+  }
   runApp(const MyApp());
 }
 
@@ -29,10 +35,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'NEWS API TEST WITH FIREBASE AUTH',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const SplashPage(),
+      theme: rootTheme(),
+      onGenerateRoute: RouteGen.generateRoute,
+       home: const SplashPage(),
     );
   }
 }

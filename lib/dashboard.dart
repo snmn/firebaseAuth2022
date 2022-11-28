@@ -65,9 +65,7 @@ class DashboardState extends State<Dashboard>{
                   {
                     switch (snapshot.connectionState){
                       case ConnectionState.none:
-                        return Container(
-                          child: const Text("Try Loading Again"),
-                        );
+                        return const Text("Try Loading Again");
                       case ConnectionState.active:
                       case ConnectionState.waiting:
                         return Container(
@@ -92,47 +90,52 @@ class DashboardState extends State<Dashboard>{
                                   itemCount: snapshot.data.articles.length,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (BuildContext context, int index)
-                                  =>Card(
-                                    elevation: 1,
-                                    child: Container(
-                                      child: Stack(
-                                        children: [
-                                          CachedNetworkImage(
-                                            imageUrl: snapshot.data.articles[index].urlToImage,
-                                            fit: BoxFit.cover,
-                                            width: size.width/1.6,
-                                            height: size.height/5,
-                                            errorWidget: (context,url, error)=>
-                                            const Icon(Icons.do_not_disturb_alt,
-                                              color: Colors.white,),
-                                            placeholder: (context,url)=>
-                                            Container(height: 30,width: 30
-                                                ,child: const
-                                                CircularProgressIndicator(strokeWidth: 0.5,)),
+                                  =>GestureDetector(
+                                    onTap: (){
+                                      Navigator.pushNamed(context, '/NewsDetail');
+                                    },
+                                    child: Card(
+                                      elevation: 1,
+                                      child: Container(
+                                        child: Stack(
+                                          children: [
+                                            CachedNetworkImage(
+                                              imageUrl: snapshot.data.articles[index].urlToImage,
+                                              fit: BoxFit.cover,
+                                              width: size.width/1.6,
+                                              height: size.height/5,
+                                              errorWidget: (context,url, error)=>
+                                              const Icon(Icons.do_not_disturb_alt,
+                                                color: Colors.white,),
+                                              placeholder: (context,url)=>
+                                              Container(height: 30,width: 30
+                                                  ,child: const
+                                                  CircularProgressIndicator(strokeWidth: 0.5,)),
 
-                                          ),
-                                          Positioned(
-                                            bottom: 10,
-                                            left: 10,
-                                            child: Column(
-                                              children:  [
-                                                Text(snapshot.data.articles[index].title,
-                                                  style:const TextStyle(color: Colors.white,
-                                                      fontSize: 16) ,),
-                                                Text(snapshot.data.articles[index].publishedAt,
-                                                  style:const TextStyle(color: Colors.white,
-                                                      fontSize: 16) ,),
-                                              ],
                                             ),
-                                          ),
-                                          const Positioned(
-                                            bottom: 10,
-                                            right: 10,
-                                            child: Icon(Icons.play_circle,
-                                              color: Colors.white,size: 30,),
-                                          )
+                                            Positioned(
+                                              bottom: 10,
+                                              left: 10,
+                                              child: Column(
+                                                children:  [
+                                                  Text(snapshot.data.articles[index].title,
+                                                    style:const TextStyle(color: Colors.white,
+                                                        fontSize: 16) ,),
+                                                  Text(snapshot.data.articles[index].publishedAt,
+                                                    style:const TextStyle(color: Colors.white,
+                                                        fontSize: 16) ,),
+                                                ],
+                                              ),
+                                            ),
+                                            const Positioned(
+                                              bottom: 10,
+                                              right: 10,
+                                              child: Icon(Icons.play_circle,
+                                                color: Colors.white,size: 30,),
+                                            )
 
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
