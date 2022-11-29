@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:news/api/get.dart';
+import 'package:news/auth.dart';
 import 'customcards.dart';
 import 'model/newsapi.dart';
 enum Gender{
@@ -16,7 +17,9 @@ class DashboardState extends State<Dashboard>{
   late Future<newsapi?> futurenews;
   int male = 0;
 
-
+  Future<void> signOut() async {
+    await Auth().signOut();
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -47,12 +50,18 @@ class DashboardState extends State<Dashboard>{
           ],
         ),
         elevation: 1,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(15),
-            child: Icon(Icons.manage_search_rounded,
-              color: Colors.white,size: 30,),
-          )
+        actions:  [
+          GestureDetector(
+            onTap: (){
+              signOut();
+            },
+            child: const Padding(
+                padding: EdgeInsets.all(15),
+                child: Icon(Icons.logout,
+                  color: Colors.white,size: 30,),
+              ),
+          ),
+
         ],
       ),
       body: Container(

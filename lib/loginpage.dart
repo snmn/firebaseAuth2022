@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:news/auth.dart';
 import 'package:news/dashboard.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SplashPage extends StatefulWidget{
   const SplashPage({Key? key}) : super(key: key);
@@ -12,7 +13,25 @@ class SplashPage extends StatefulWidget{
   }
 }
 class SplashPageState extends State<SplashPage>{
-
+  final storage = const FlutterSecureStorage();
+  readfromstorage() async {
+    String? value = await storage.read(key: "first");
+    if(value==null){
+      //go to registration
+      //first false
+      await storage.write(key: "first", value: "false");
+      Navigator.pushNamed(context, "/Signin");
+    } else{
+      Navigator.pushNamed(context, "/Dashboard");
+      //Dashboard page
+      await storage.write(key: "first", value: "false");
+    }
+  }
+  @override
+  void initState() {
+    super.initState();
+    //readfromstorage();
+  }
   @override
   Widget build(BuildContext context) {
    return StreamBuilder<User?>(
@@ -27,7 +46,6 @@ class SplashPageState extends State<SplashPage>{
   }
 
 }
-
 class Signin extends StatefulWidget{
   const Signin({Key? key}) : super(key: key);
 
