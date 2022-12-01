@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:news/auth.dart';
-import 'package:news/dashboard.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:news/authentication/auth.dart';
+import 'package:news/dashboard/dashboard.dart';
 
 class SplashPage extends StatefulWidget{
   const SplashPage({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:news/dashboard.dart';
-import 'package:news/loginpage.dart';
-import 'package:news/newsdetail.dart';
+import 'package:news/authentication/loginpage.dart';
+import 'package:news/dashboard/dashboard.dart';
+import 'package:news/detail/newsdetail.dart';
 
 class RouteGen{
   static Route<dynamic> generateRoute(RouteSettings setting){

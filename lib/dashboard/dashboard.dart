@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:news/api/get.dart';
-import 'package:news/auth.dart';
-import 'customcards.dart';
-import 'model/newsapi.dart';
+import 'package:news/authentication/auth.dart';
+import '../customcards.dart';
+import '../model/newsapi.dart';
 enum Gender{
 male, female, other
 }
@@ -40,9 +40,8 @@ class DashboardState extends State<Dashboard>{
           mainAxisAlignment: MainAxisAlignment.center,
           children:  [
             //if
-             male==0?const Text("His Dashboard",
-            style: TextStyle(color: Colors.white,fontSize: 16,
-                fontWeight: FontWeight.bold),):
+             male==0? Text("His Dashboard",
+            style: Theme.of(context).textTheme.headline1,):
              //else
              const Text("Her Dashboard",
               style: TextStyle(color: Colors.white,fontSize: 16,
